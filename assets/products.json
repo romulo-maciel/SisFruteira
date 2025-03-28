@@ -1,0 +1,800 @@
+{
+    "01": {
+        "name": "Abacate",
+        "code": "01",
+        "price": 6.90,
+        "image": "abacate.jpg",
+        "isUnitary": false
+    },
+    "02": {
+        "name": "Abacaxi 1 UN",
+        "code": "02",
+        "price": 4.90,
+        "image": "abacaxi-1-un.jpg",
+        "isUnitary": true
+    },
+    "03": {
+        "name": "Abacaxi II",
+        "code": "03",
+        "price": 3.90,
+        "image": "abacaxi-ii.jpg",
+        "isUnitary": true
+    },
+    "04": {
+        "name": "Abóbora",
+        "code": "04",
+        "price": 3.49,
+        "image": "abobora.jpg",
+        "isUnitary": false
+    },
+    "05": {
+        "name": "Abobrinha",
+        "code": "05",
+        "price": 3.99,
+        "image": "abobrinha.jpg",
+        "isUnitary": false
+    },
+    "06": {
+        "name": "Aipim",
+        "code": "06",
+        "price": 9.90,
+        "image": "aipim.jpg",
+        "isUnitary": true
+    },
+    "07": {
+        "name": "Alface",
+        "code": "07",
+        "price": 1.99,
+        "image": "alface.jpg",
+        "isUnitary": true
+    },
+    "08": {
+        "name": "Alho",
+        "code": "08",
+        "price": 24.90,
+        "image": "alho.jpg",
+        "isUnitary": false
+    },
+    "09": {
+        "name": "Alho Poró",
+        "code": "09",
+        "price": 3.99,
+        "image": "alho-poro.jpg",
+        "isUnitary": true
+    },
+    "10": {
+        "name": "Ameixa",
+        "code": "10",
+        "price": 8.99,
+        "image": "ameixa.jpg",
+        "isUnitary": false
+    },
+    "11": {
+        "name": "Amendoim com Casca",
+        "code": "11",
+        "price": 9.90,
+        "image": "amendoim-com-casca.jpg",
+        "isUnitary": false
+    },
+    "12": {
+        "name": "Amendoim sem Casca",
+        "code": "12",
+        "price": 9.90,
+        "image": "amendoim-sem-casca.jpg",
+        "isUnitary": false
+    },
+    "13": {
+        "name": "Banana Caturra",
+        "code": "13",
+        "price": 3.99,
+        "image": "banana-caturra.jpg",
+        "isUnitary": false
+    },
+    "14": {
+        "name": "Banana Prata",
+        "code": "14",
+        "price": 3.99,
+        "image": "banana-prata.jpg",
+        "isUnitary": false
+    },
+    "15": {
+        "name": "Banana Solta",
+        "code": "15",
+        "price": 1.99,
+        "image": "banana-solta.jpg",
+        "isUnitary": false
+    },
+    "16": {
+        "name": "Batata Branca",
+        "code": "16",
+        "price": 2.49,
+        "image": "batata-branca.jpg",
+        "isUnitary": false
+    },
+    "17": {
+        "name": "Batata Doce",
+        "code": "17",
+        "price": 4.99,
+        "image": "batata-doce.jpg",
+        "isUnitary": false
+    },
+    "18": {
+        "name": "Batata Doce Abóbora",
+        "code": "18",
+        "price": 4.99,
+        "image": "batata-doce-abobora.jpg",
+        "isUnitary": false
+    },
+    "19": {
+        "name": "Batata Rosa I",
+        "code": "19",
+        "price": 3.99,
+        "image": "batata-rosa.jpg",
+        "isUnitary": false
+    },
+    "20": {
+        "name": "Bergamota Cai",
+        "code": "20",
+        "price": 3.99,
+        "image": "bergamota-cai.jpg",
+        "isUnitary": false
+    },
+    "21": {
+        "name": "Bergamota Japonesa",
+        "code": "21",
+        "price": null,
+        "image": "bergamota-japonesa.jpg",
+        "isUnitary": false
+    },
+    "22": {
+        "name": "Bergamota Ponkan",
+        "code": "22",
+        "price": null,
+        "image": "bergamota-ponkan.jpg",
+        "isUnitary": false
+    },
+    "23": {
+        "name": "Berinjela",
+        "code": "23",
+        "price": 6.90,
+        "image": "berinjela.jpg",
+        "isUnitary": false
+    },
+    "24": {
+        "name": "Beterraba",
+        "code": "24",
+        "price": 1.99,
+        "image": "beterraba.jpg",
+        "isUnitary": false
+    },
+    "25": {
+        "name": "Brócolis",
+        "code": "25",
+        "price": 2.99,
+        "image": "brocolis.jpg",
+        "isUnitary": true
+    },
+    "26": {
+        "name": "Cebola I",
+        "code": "26",
+        "price": 1.99,
+        "image": "cebola-1.jpg",
+        "isUnitary": true
+    },
+    "27": {
+        "name": "Cebola II",
+        "code": "27",
+        "price": null,
+        "image": "cebola-2.jpg",
+        "isUnitary": false
+    },
+    "28": {
+        "name": "Cebola Roxa",
+        "code": "28",
+        "price": 7.90,
+        "image": "cebola-roxa.jpg",
+        "isUnitary": false
+    },
+    "29": {
+        "name": "Cenoura",
+        "code": "29",
+        "price": 1.99,
+        "image": "cenoura.jpg",
+        "isUnitary": false
+    },
+    "30": {
+        "name": "Chuchu",
+        "code": "30",
+        "price": 1.99,
+        "image": "chuchu.jpg",
+        "isUnitary": false
+    },
+    "31": {
+        "name": "Chimichurri",
+        "code": "31",
+        "price": 3.50,
+        "image": "chimichurri.jpg",
+        "isUnitary": true
+    },
+    "32": {
+        "name": "Clorifício 100GR",
+        "code": "32",
+        "price": 3.50,
+        "image": "clorificio-100gr.jpg",
+        "isUnitary": true
+    },
+    "33": {
+        "name": "Clorifício 200GR",
+        "code": "33",
+        "price": 4.50,
+        "image": "clorificio-200gr.jpg",
+        "isUnitary": true
+    },
+    "34": {
+        "name": "Coco Seco",
+        "code": "34",
+        "price": 7.90,
+        "image": "coco-seco.jpg",
+        "isUnitary": false
+    },
+    "35": {
+        "name": "Coentro",
+        "code": "35",
+        "price": 3.50,
+        "image": "coentro.jpg",
+        "isUnitary": true
+    },
+    "36": {
+        "name": "Cominho 80GR",
+        "code": "36",
+        "price": 4.50,
+        "image": "cominho-80gr.jpg",
+        "isUnitary": true
+    },
+    "37": {
+        "name": "Confeito Granulado 100GR",
+        "code": "37",
+        "price": 3.50,
+        "image": "confeito-granulado-100gr.jpg",
+        "isUnitary": true
+    },
+    "38": {
+        "name": "Couve",
+        "code": "38",
+        "price": 1.99,
+        "image": "couve.jpg",
+        "isUnitary": true
+    },
+    "39": {
+        "name": "Couve-Flor",
+        "code": "39",
+        "price": 3.99,
+        "image": "couve-flor.jpg",
+        "isUnitary": true
+    },
+    "40": {
+        "name": "Farinha de Rosca 200GR",
+        "code": "40",
+        "price": 3.00,
+        "image": "farinha-de-rosca-200gr.jpg",
+        "isUnitary": true
+    },
+    "41": {
+        "name": "Frutas Cristalizadas",
+        "code": "41",
+        "price": 8.00,
+        "image": "frutas-cristalizadas.jpg",
+        "isUnitary": false
+    },
+    "42": {
+        "name": "Gengibre",
+        "code": "42",
+        "price": 14.90,
+        "image": "gengibre.jpg",
+        "isUnitary": false
+    },
+    "43": {
+        "name": "Goiaba",
+        "code": "43",
+        "price": 8.90,
+        "image": "goiaba.jpg",
+        "isUnitary": false
+    },
+    "44": {
+        "name": "Granola",
+        "code": "44",
+        "price": null,
+        "image": "granola.jpg",
+        "isUnitary": true
+    },
+    "45": {
+        "name": "Inhame",
+        "code": "45",
+        "price": 19.90,
+        "image": "inhame.jpg",
+        "isUnitary": false
+    },
+    "46": {
+        "name": "Kit Picado",
+        "code": "46",
+        "price": 10.00,
+        "image": "kit-picado.jpg",
+        "isUnitary": true
+    },
+    "47": {
+        "name": "Kiwi",
+        "code": "47",
+        "price": 21.90,
+        "image": "kiwi.jpg",
+        "isUnitary": false
+    },
+    "48": {
+        "name": "Laranja Céu",
+        "code": "48",
+        "price": 5.90,
+        "image": "laranja-ceu.jpg",
+        "isUnitary": false
+    },
+    "49": {
+        "name": "Laranja Suco",
+        "code": "49",
+        "price": 6.90,
+        "image": "laranja-suco.jpg",
+        "isUnitary": false
+    },
+    "50": {
+        "name": "Laranja Umbigo",
+        "code": "50",
+        "price": 6.90,
+        "image": "laranja-umbigo.jpg",
+        "isUnitary": false
+    },
+    "51": {
+        "name": "Limão",
+        "code": "51",
+        "price": 7.90,
+        "image": "limao.jpg",
+        "isUnitary": false
+    },
+    "52": {
+        "name": "Maçã Argentina",
+        "code": "52",
+        "price": 13.90,
+        "image": "maca-argentina.jpg",
+        "isUnitary": false
+    },
+    "53": {
+        "name": "Maçã Nacional",
+        "code": "53",
+        "price": 7.99,
+        "image": "maca-nacional.jpg",
+        "isUnitary": false
+    },
+    "54": {
+        "name": "Maçã Verde",
+        "code": "54",
+        "price": 13.90,
+        "image": "maca-verde.jpg",
+        "isUnitary": false
+    },
+    "55": {
+        "name": "Mamão Formosa",
+        "code": "55",
+        "price": 7.00,
+        "image": "mamao-formosa.jpg",
+        "isUnitary": false
+    },
+    "56": {
+        "name": "Mamão Papaya",
+        "code": "56",
+        "price": 6.90,
+        "image": "mamao-papaya.jpg",
+        "isUnitary": false
+    },
+    "57": {
+        "name": "Manga",
+        "code": "57",
+        "price": 8.90,
+        "image": "manga.jpg",
+        "isUnitary": false
+    },
+    "58": {
+        "name": "Maracujá",
+        "code": "58",
+        "price": 14.90,
+        "image": "maracuja.jpg",
+        "isUnitary": false
+    },
+    "59": {
+        "name": "Mel 1000gr",
+        "code": "59",
+        "price": 27.00,
+        "image": "mel-1000gr.jpg",
+        "isUnitary": true
+    },
+    "60": {
+        "name": "Mel 300gr",
+        "code": "60",
+        "price": 10.00,
+        "image": "mel-300gr.jpg",
+        "isUnitary": true
+    },
+    "61": {
+        "name": "Mel 500gr",
+        "code": "61",
+        "price": 15.00,
+        "image": "mel-500gr.jpg",
+        "isUnitary": true
+    },
+    "62": {
+        "name": "Melancia Fatia",
+        "code": "62",
+        "price": 5.00,
+        "image": "melancia-fatia.jpg",
+        "isUnitary": true
+    },
+    "63": {
+        "name": "Melancia Inteira",
+        "code": "63",
+        "price": 13.99,
+        "image": "melancia-inteira.jpg",
+        "isUnitary": false
+    },
+    "64": {
+        "name": "Melancia Metade",
+        "code": "64",
+        "price": 10.00,
+        "image": "melancia-metade.jpg",
+        "isUnitary": true
+    },
+    "65": {
+        "name": "Melão Cantaloupe",
+        "code": "65",
+        "price": 10.00,
+        "image": "melao-cantaloupe.jpg",
+        "isUnitary": false
+    },
+    "66": {
+        "name": "Melão Espanhol",
+        "code": "66",
+        "price": null,
+        "image": "melao-espanhol.jpg",
+        "isUnitary": false
+    },
+    "67": {
+        "name": "Melão Gália",
+        "code": "67",
+        "price": null,
+        "image": "melao-galia.jpg",
+        "isUnitary": false
+    },
+    "68": {
+        "name": "Milho",
+        "code": "68",
+        "price": 7.90,
+        "image": "milho.jpg",
+        "isUnitary": true
+    },
+    "69": {
+        "name": "Morango",
+        "code": "69",
+        "price": 26.90,
+        "image": "morango.jpg",
+        "isUnitary": false
+    },
+    "70": {
+        "name": "Morango BDJ",
+        "code": "70",
+        "price": 6.90,
+        "image": "morango-bdj.jpg",
+        "isUnitary": false
+    },
+    "71": {
+        "name": "Orégano 25gr",
+        "code": "71",
+        "price": 3.50,
+        "image": "oregano-25gr.jpg",
+        "isUnitary": true
+    },
+    "72": {
+        "name": "Orégano 50gr",
+        "code": "72",
+        "price": 5.50,
+        "image": "oregano-50gr.jpg",
+        "isUnitary": true
+    },
+    "73": {
+        "name": "Ovo Branco Cartela 20 un",
+        "code": "73",
+        "price": 8.99,
+        "image": "ovo-branco-20un.jpg",
+        "isUnitary": true
+    },
+    "74": {
+        "name": "Ovo Branco Cartela 30 un",
+        "code": "74",
+        "price": 13.90,
+        "image": "ovo-branco-30un.jpg",
+        "isUnitary": true
+    },
+    "75": {
+        "name": "Ovo Caipira Dúzia",
+        "code": "75",
+        "price": 13.90,
+        "image": "ovo-caipira-duzia.jpg",
+        "isUnitary": true
+    },
+    "76": {
+        "name": "Ovo Codorna",
+        "code": "76",
+        "price": null,
+        "image": "ovo-codorna.jpg",
+        "isUnitary": true
+    },
+    "77": {
+        "name": "Ovo Dúzia",
+        "code": "77",
+        "price": 7.50,
+        "image": "ovo-duzia.jpg",
+        "isUnitary": true
+    },
+    "78": {
+        "name": "Ovo Vermelho Cartela 20 un",
+        "code": "78",
+        "price": 16.90,
+        "image": "ovo-vermelho-20un.jpg",
+        "isUnitary": true
+    },
+    "79": {
+        "name": "Ovo Vermelho Cartela 30 un",
+        "code": "79",
+        "price": null,
+        "image": "ovo-vermelho-30un.jpg",
+        "isUnitary": true
+    },
+    "80": {
+        "name": "PEPINO",
+        "code": "80",
+        "price": 5.30,
+        "image": "pepino.jpg",
+        "isUnitary": false
+    },
+    "81": {
+        "name": "PERA",
+        "code": "81",
+        "price": 10.90,
+        "image": "pera.jpg",
+        "isUnitary": false
+    },
+    "82": {
+        "name": "PESSEGO AMARELO",
+        "code": "82",
+        "price": 7.90,
+        "image": "pessego-amarelo.jpg",
+        "isUnitary": false
+    },
+    "83": {
+        "name": "PESSEGO BRANCO",
+        "code": "83",
+        "price": 7.90,
+        "image": "pessego-branco.jpg",
+        "isUnitary": false
+    },
+    "84": {
+        "name": "PIMENTAO COLORIDO",
+        "code": "84",
+        "price": 14.90,
+        "image": "pimentao-colorido.jpg",
+        "isUnitary": false
+    },
+    "85": {
+        "name": "PIMENTAO",
+        "code": "85",
+        "price": 12.90,
+        "image": "pimentao.jpg",
+        "isUnitary": false
+    },
+    "86": {
+        "name": "PINHAO",
+        "code": "86",
+        "price": null,
+        "image": "pinhao.jpg",
+        "isUnitary": false
+    },
+    "87": {
+        "name": "PITAYA",
+        "code": "87",
+        "price": null,
+        "image": "pitaya.jpg",
+        "isUnitary": false
+    },
+    "88": {
+        "name": "QUIABO",
+        "code": "88",
+        "price": null,
+        "image": "quiabo.jpg",
+        "isUnitary": true
+    },
+    "89": {
+        "name": "REPOLHO INTEIRO",
+        "code": "89",
+        "price": 4.90,
+        "image": "repolho-inteiro.jpg",
+        "isUnitary": true
+    },
+    "90": {
+        "name": "REPOLHO METADE",
+        "code": "90",
+        "price": 2.90,
+        "image": "repolho-metade.jpg",
+        "isUnitary": true
+    },
+    "91": {
+        "name": "REPOLHO ROXO",
+        "code": "91",
+        "price": 5.90,
+        "image": "repolho-roxo.jpg",
+        "isUnitary": true
+    },
+    "92": {
+        "name": "TEMPERO / SALSA",
+        "code": "92",
+        "price": 1.99,
+        "image": "tempero-salsa.jpg",
+        "isUnitary": true
+    },
+    "93": {
+        "name": "TEMPERO CHURRASCO 100GR",
+        "code": "93",
+        "price": 3.00,
+        "image": "tempero-churrasco-100gr.jpg",
+        "isUnitary": true
+    },
+    "94": {
+        "name": "TEMPEROS",
+        "code": "94",
+        "price": 2.25,
+        "image": "temperos.jpg",
+        "isUnitary": true
+    },
+    "95": {
+        "name": "TOMATE CEREJA KG",
+        "code": "95",
+        "price": 18.90,
+        "image": "tomate-cereja-kg.jpg",
+        "isUnitary": false
+    },
+    "96": {
+        "name": "TOMATE CEREJA BDJ",
+        "code": "96",
+        "price": 3.99,
+        "image": "tomate-cereja-bdj.jpg",
+        "isUnitary": true
+    },
+    "97": {
+        "name": "TOMATE I",
+        "code": "97",
+        "price": 4.99,
+        "image": "tomate-i.jpg",
+        "isUnitary": false
+    },
+    "98": {
+        "name": "TOMATE II",
+        "code": "98",
+        "price": 2.49,
+        "image": "tomate-ii.jpg",
+        "isUnitary": false
+    },
+    "99": {
+        "name": "UVA DE MESA",
+        "code": "99",
+        "price": 14.90,
+        "image": "uva-de-mesa.jpg",
+        "isUnitary": false
+    },
+    "100": {
+        "name": "UVA NIAGRA",
+        "code": "100",
+        "price": null,
+        "image": "uva-niagra.jpg",
+        "isUnitary": false
+    },
+    "101": {
+        "name": "UVA PRETA",
+        "code": "101",
+        "price": 12.90,
+        "image": "uva-preta.jpg",
+        "isUnitary": false
+    },
+    "102": {
+        "name": "VAGEM",
+        "code": "102",
+        "price": 9.90,
+        "image": "vagem.jpg",
+        "isUnitary": false
+    },
+    "103": {
+        "name": "Caixa de banana 23 kg",
+        "code": "103",
+        "price": 85.00,
+        "image": "caixa-banana-23kg.jpg",
+        "isUnitary": true
+    },
+    "104": {
+        "name": "Caixa de batata doce 20kg",
+        "code": "104",
+        "price": 80.00,
+        "image": "caixa-batata-doce-20kg.jpg",
+        "isUnitary": true
+    },
+    "105": {
+        "name": "Caixa de cenoura 20kg",
+        "code": "105",
+        "price": 40.00,
+        "image": "caixa-cenoura-20kg.jpg",
+        "isUnitary": true
+    },
+    "106": {
+        "name": "Caixa de laranja suco 20kg",
+        "code": "106",
+        "price": 88.00,
+        "image": "caixa-laranja-suco-20kg.jpg",
+        "isUnitary": true
+    },
+    "107": {
+        "name": "Caixa de ovo branco 30 dz",
+        "code": "107",
+        "price": 165.00,
+        "image": "caixa-ovo-branco-30dz.jpg",
+        "isUnitary": true
+    },
+    "108": {
+        "name": "Caixa de ovo jumbo 10 dz",
+        "code": "108",
+        "price": 54.00,
+        "image": "caixa-ovo-jumbo-10dz.jpg",
+        "isUnitary": true
+    },
+    "109": {
+        "name": "Caixa de ovo vermelho 30 dz",
+        "code": "109",
+        "price": 200.00,
+        "image": "caixa-ovo-vermelho-30dz.jpg",
+        "isUnitary": true
+    },
+    "110": {
+        "name": "Caixa de tomate 20kg",
+        "code": "110",
+        "price": 50.00,
+        "image": "caixa-tomate-20kg.jpg",
+        "isUnitary": true
+    },
+    "111": {
+        "name": "Saco de abobora 20kg",
+        "code": "111",
+        "price": 70.00,
+        "image": "saco-abobora-20kg.jpg",
+        "isUnitary": true
+    },
+    "112": {
+        "name": "Saco de batata rosa 25kg",
+        "code": "112",
+        "price": 90.00,
+        "image": "saco-batata-rosa-25kg.jpg",
+        "isUnitary": true
+    },
+    "113": {
+        "name": "Saco de beterraba 20kg",
+        "code": "113",
+        "price": 40.00,
+        "image": "saco-beterraba-20kg.jpg",
+        "isUnitary": true
+    },
+    "114": {
+        "name": "Saco de cebola 20kg",
+        "code": "114",
+        "price": 40.00,
+        "image": "saco-cebola-20kg.jpg",
+        "isUnitary": true
+    }
+}

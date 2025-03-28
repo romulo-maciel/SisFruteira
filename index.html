@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>
+        window.cartAPI.addToCart((message) => {
+            console.log(message);
+        })
+
+        const changePage = (page) => {
+            const pages = document.querySelectorAll('.container');
+            pages.forEach((p) => {
+                p.classList.add('hidden');
+            });
+
+            document.getElementById(page).classList.remove('hidden');
+        }
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/estoque.css">
+    <link rel="stylesheet" href="css/header.css">
+    <title>Fruteira NSª Aparecida</title>
+    <script src="js/pdv.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <header>
+        <img src="assets/logo.jpg" id="logo" alt="Logo da Fruteira NSª Aparecida">
+        <h1>Fruteira NSª Aparecida</h1>
+        <nav>
+            <a class="header-nav-link" onclick="changePage('pdv')">PDV</a>
+            <a class="header-nav-link" onclick="changePage('estoque')">Estoque</a>
+            <a class="header-nav-link" onclick="changePage('relatorios')">Relatórios</a>
+            <a class="header-nav-link" onclick="console.log(window.cartAPI.promptQuantity())">teste</a>
+        </nav>
+    </header>
+
+    <main class="container" id="pdv">
+        <section class="side" id="left-side-container">
+            <img src="assets/logo.jpg" alt="logo" id="big-logo">
+        </section>
+
+        <section class="side" id="right-side-container">
+            <div class="card-row">
+                <div class="card-info">
+                    <p class="card-title">Qtd:</p>
+                    <p class="card-value" id="weight"></p>
+                </div>
+                <div class="card-info">
+                    <p class="card-title">Valor:</p>
+                    <p class="card-value" id="item-price"></p>
+                </div>
+            </div>
+            <div class="product-input">
+                <label for="code">Código do Produto</label>
+                <input type="number" name="code" id="code" placeholder="Digite o código" autofocus>
+            </div>
+            <div class="product-input"></div>
+            <div class="selected-product-card">
+                <img src="" id="product-image" alt="Imagem do Produto">
+                <div>
+                    <p id="product-name">Nome do Produto</p>
+                    <p id="product-price">Preço</p>
+                </div>
+            </div>
+
+            <table class="cart">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Preço Un.</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-list"></tbody>
+            </table>
+
+            <div class="inline" style="margin-top: 15px;">
+                <div class="cart-total">
+                    <p>Total: R$ <span id="cart-total">0.00</span></p>
+                </div>
+                <input type="button" onclick="finishPurchase()" value="Finalizar Compra" id="finish-sale">
+            </div>
+        </section>
+    </main>
+
+    <main class="container hidden" id="estoque">
+        <script>
+
+
+            const populateCards = (fruits) => {
+                const container = document.getElementById('estoque');
+                const cards = fruits.map((fruit) => {
+                    return `
+                    <div class="fruit-card">
+                        <img class="fruit-image" src="assets/logo.jpg" alt="${fruit.name}" width="50" height="50">
+                        <div class="fruit-info">
+                            <h2>${fruit.name}</h2>
+                            <p class="fruit-price" onclick="updatePrice('${fruit.name}', '${fruit.code}')">Preço: R$ ${fruit.price}
+                            </p>
+                        </div>
+                    </div>
+                    `
+                });
+
+                container.innerHTML = cards.join('');
+            }
+
+            window.onload = () => {
+                window.fruitsAPI.ping();
+                const fruits = Object.values(window.fruitsAPI.getFruits());
+                // console.log(fruits);
+                populateCards(fruits);
+            }
+
+        </script>
+    </main>
+
+    <main class="container hidden" id="relatorios">
+        <h2 class="title">Relatórios</h2>
+        <table id="report-grid">
+            <thead>
+                <tr>
+                    <th scope="col">Produto</th>
+                    <th scope="col">Quantidade</th>
+                    <th scope="col">Preço Un.</th>
+                    <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody id="report-body">
+                <!-- Dados serão inseridos aqui -->
+            </tbody>
+        </table>
+        <canvas id="quantity-chart"></canvas>
+    </main>
+
+</body>
+
+</html>

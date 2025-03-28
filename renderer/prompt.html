@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt</title>
+    <script>
+        window.addEventListener('onDOMContentLoaded', () => {
+            const quantityInput = document.getElementById('quantity');
+            // console.log('loaded');
+            quantityInput.focus();
+        });
+
+        function updateQuantity(qtd) {
+            console.log(qtd);
+            window.cartAPI.updateQuantity(qtd);
+        }
+
+        function submit() {
+            const quantity = document.getElementById('quantity').value;
+            console.log('submit');
+            console.log(quantity);
+
+            if (quantity > 0) {
+                console.log(`Quantity: ${quantity}`);
+                window.cartAPI.updateQuantity(Number(quantity));
+                // window.electronAPI.sendQuantity(Number(quantity));
+                window.close();
+            }
+        }
+
+        addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const value = document.getElementById('value');
+                updateQuantity(value.value);
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div class="box">
+        <h1>Insira a quantidade</h1>
+        <input type="text" name="quantity" id="quantity" onchange="submit" autofocus>
+        <button onclick="submit()">Ok</button>
+    </div>
+</body>
+
+
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        background-color: #00000000;
+    }
+
+    .box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 200px;
+        width: 300px;
+        background-color: #f8f9fa;
+        border: 1px solid #ccc;
+        border-radius: 15px;
+    }
+
+    input {
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+</html>

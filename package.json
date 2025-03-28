@@ -1,0 +1,38 @@
+{
+  "name": "fruteira",
+  "version": "1.0.0",
+  "description": "Sistema desenvolvido em electron para uma fruteira",
+  "keywords": [
+    "fruteira",
+    "sistema",
+    "electron",
+    "pdv",
+    "erp",
+    "vendas"
+  ],
+  "homepage": "https://github.com/romulo-maciel/SisFruteira#readme",
+  "bugs": {
+    "url": "https://github.com/romulo-maciel/SisFruteira/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/romulo-maciel/SisFruteira.git"
+  },
+  "license": "ISC",
+  "author": "Rômulo Maciel",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "watch": "nodemon --exec electron .",
+    "test": "electron .",
+    "run": "electron."
+  },
+  "devDependencies": {
+    "electron": "^34.3.0"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "fs": "^0.0.1-security",
+    "serialport": "^13.0.0"
+  }
+}

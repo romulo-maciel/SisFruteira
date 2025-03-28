@@ -1,0 +1,152 @@
+[
+  {
+    "date": "12:12:33 AM",
+    "items": [
+      {
+        "name": "Laranja",
+        "quantity": 5,
+        "price": 1.8,
+        "total": 9
+      },
+      {
+        "name": "Uva",
+        "quantity": 2.5,
+        "price": 3,
+        "total": 7.5
+      }
+    ],
+    "total": "16.50"
+  },
+  {
+    "date": "12:13:48 AM",
+    "items": [
+      {
+        "name": "Abacaxi",
+        "quantity": 5,
+        "price": 4,
+        "total": 20
+      },
+      {
+        "name": "Maçã",
+        "quantity": 4.2,
+        "price": 2.8,
+        "total": 11.76
+      }
+    ],
+    "total": "31.76"
+  },
+  {
+    "date": "12:14:16 AM",
+    "items": [
+      {
+        "name": "Abacaxi",
+        "quantity": 2.3,
+        "price": 4,
+        "total": 9.2
+      }
+    ],
+    "total": "9.20"
+  },
+  {
+    "date": "10:31:51 AM",
+    "items": [
+      {
+        "name": "Maçã",
+        "quantity": 1.2,
+        "price": 2.8,
+        "total": 3.36
+      },
+      {
+        "name": "Pera",
+        "quantity": 2.1,
+        "price": 2.8,
+        "total": 5.88
+      },
+      {
+        "name": "Maçã",
+        "quantity": 1.2,
+        "price": 2.8,
+        "total": 3.36
+      },
+      {
+        "name": "Laranja",
+        "quantity": 15,
+        "price": 1.8,
+        "total": 27
+      }
+    ],
+    "total": "39.60"
+  },
+  {
+    "date": "10:45:27 AM",
+    "items": [
+      {
+        "name": "Pera",
+        "quantity": 0.94,
+        "price": 2.8,
+        "total": 2.63
+      },
+      {
+        "name": "Pera",
+        "quantity": 1.2,
+        "price": 2.8,
+        "total": 3.36
+      },
+      {
+        "name": "Uva",
+        "quantity": 2.5,
+        "price": 3,
+        "total": 7.5
+      },
+      {
+        "name": "Maçã",
+        "quantity": 1,
+        "price": 2.8,
+        "total": 2.8
+      }
+    ],
+    "total": "16.29"
+  },
+  {
+    "date": "10:45:50 AM",
+    "items": [
+      {
+        "name": "Kiwi",
+        "quantity": 0.5,
+        "price": 2.5,
+        "total": 1.25
+      }
+    ],
+    "total": "1.25"
+  },
+  {
+    "date": "8:22:24 PM",
+    "items": [
+      {
+        "name": "Maçã",
+        "quantity": 2.5,
+        "price": 4,
+        "total": 10
+      },
+      {
+        "name": "Uva",
+        "quantity": 2.1,
+        "price": 3,
+        "total": 6.3
+      }
+    ],
+    "total": "16.30"
+  },
+  {
+    "date": "3:43:28 PM",
+    "items": [
+      {
+        "name": "Banana",
+        "quantity": 2.5,
+        "price": 2.33,
+        "total": 5.83
+      }
+    ],
+    "total": "5.83"
+  }
+]

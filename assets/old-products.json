@@ -1,0 +1,79 @@
+{
+    "1": {
+        "name": "Abacate",
+        "code": "01",
+        "price": 4.8,
+        "image": "abacate.jpg"
+    },
+    "2": {
+        "name": "Abacaxi I",
+        "code": "02",
+        "price": 4.9,
+        "image": "abacaxi.jpg",
+        "isUnitary": true
+    },
+    "3": {
+        "name": "Abacaxi II",
+        "code": "03",
+        "price": 9.90,
+        "image": "abacaxi.jpg",
+        "isUnitary": true
+    },
+    "4": {
+        "name": "Abobora",
+        "code": "04",
+        "price": 3.49,
+        "image": "abobora.jpg"
+    },
+    "5": {
+        "name": "Abobrinha",
+        "code": "05",
+        "price": 4.9,
+        "image": "abobrinha.jpg"
+    },
+    "6": {
+        "name": "Aipim",
+        "code": "06",
+        "price": 9.9,
+        "image": "aipim.jpg",
+        "isUnitary": true
+    },
+    "7": {
+        "name": "Alface",
+        "code": "07",
+        "price": 1.99,
+        "image": "alface.jpg",
+        "isUnitary": true
+    },
+    "8": {
+        "name": "Alho",
+        "code": "08",
+        "price": 24.9,
+        "image": "alho.jpg"
+    },
+    "9": {
+        "name": "Alho Poró",
+        "code": "09",
+        "price": 3.99,
+        "image": "alho-poro.jpg",
+        "isUnitary": true
+    },
+    "10": {
+        "name": "Ameixa",
+        "code": "10",
+        "price": 8.99,
+        "image": "ameixa.jpg"
+    },
+    "11": {
+        "name": "Amendoim com casca",
+        "code": "11",
+        "price": 9.9,
+        "image": "amendoim.jpg"
+    },
+    "12": {
+        "name": "Amendoim sem casca",
+        "code": "12",
+        "price": 14.9,
+        "image": "amendoim.jpg"
+    },
+}

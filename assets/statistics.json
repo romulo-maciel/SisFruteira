@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Abacaxi",
+    "quantity": 7.3,
+    "total": 29.2,
+    "price": 4
+  },
+  {
+    "name": "Banana",
+    "quantity": "2.50",
+    "total": "5.83",
+    "price": "2.33"
+  },
+  {
+    "name": "Kiwi",
+    "quantity": "0.50",
+    "total": "1.25",
+    "price": "2.50"
+  },
+  {
+    "name": "Maçã",
+    "quantity": 7.6,
+    "total": 21.28,
+    "price": 2.8
+  },
+  {
+    "name": "Maçã",
+    "quantity": "2.50",
+    "total": "10.00",
+    "price": "4.00"
+  },
+  {
+    "name": "Pera",
+    "quantity": 4.24,
+    "total": 11.87,
+    "price": 2.8
+  },
+  {
+    "name": "Uva",
+    "quantity": 7.1,
+    "total": 21.3,
+    "price": 3
+  }
+]

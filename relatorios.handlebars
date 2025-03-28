@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Relatórios da Fruteira NSª Aparecida">
+    <title>Relatórios - Fruteira NSª Aparecida</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/relatorios.css">
+    <script src="js/relatorios.js" defer></script>
+    <script src="https://livejs.com/live.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <header>
+        <img src="assets/logo.jpg" id="logo" alt="Logo da Fruteira NSª Aparecida">
+        <h1>Fruteira NSª Aparecida</h1>
+        <nav aria-label="Navegação principal">
+            <a class="header-nav-link" href="/pdv">PDV</a>
+            <a class="header-nav-link" href="/estoque">Estoque</a>
+        </nav>
+    </header>
+    <main class="container">
+        <h2 class="title">Relatórios</h2>
+        <table id="report-grid">
+            <thead>
+                <tr>
+                    <th scope="col">Produto</th>
+                    <th scope="col">Quantidade</th>
+                    <th scope="col">Preço Un.</th>
+                    <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody id="report-body">
+                <!-- Dados serão inseridos aqui -->
+            </tbody>
+        </table>
+        <canvas id="quantity-chart"></canvas>
+    </main>
+</body>
+
+</html>
