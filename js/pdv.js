@@ -117,8 +117,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (product && product.isUnitary) {
             weightInfo.textContent = "";
             itemPrice.textContent = "";
-
-
             return;
         }
 
@@ -159,9 +157,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
                 , 500);
         });
+
+        if (interval) {
+            clearInterval(interval);
+            interval = null
+        }
     }
 
     codeInput.addEventListener("change", () => {
+        if (interval) {
+            clearInterval(interval);
+            interval = null
+        }
         setProduct(codeInput.value);
     });
 
@@ -214,7 +221,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             total += product.price * qtd;
             document.getElementById("cart-total").textContent = `${total.toFixed(2)}`;
-            
+
             if (interval) {
                 clearInterval(interval);
                 interval = null;
