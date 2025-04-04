@@ -120,8 +120,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
-        getWeight().then(async weight => {
-            // console.log(product.price, weight.slice(1));
+        getWeight().then(async weight => {  
             while (weight.slice(1) == 'IIIII') {
                 // await new Promise(resolve => setTimeout(resolve, 100)); // Wait 100ms before requesting again
                 weight = await getWeight();
@@ -195,7 +194,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 qtd = parseFloat(weight.slice(1)) / 1000
                 addRow();
             })
-            // qtd = parseFloat(weightInfo.textContent.replace("kg", ""));
         }
 
         const addRow = () => {

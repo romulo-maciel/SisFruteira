@@ -112,9 +112,7 @@
             }
 
             window.onload = () => {
-                window.fruitsAPI.ping();
                 const fruits = Object.values(window.fruitsAPI.getFruits());
-                // console.log(fruits);
                 populateCards(fruits);
             }
 

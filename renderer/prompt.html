@@ -19,8 +19,6 @@
 
         function submit() {
             const quantity = document.getElementById('quantity').value;
-            console.log('submit');
-            console.log(quantity);
 
             if (quantity > 0) {
                 console.log(`Quantity: ${quantity}`);
@@ -32,8 +30,7 @@
 
         addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
-                const value = document.getElementById('value');
-                updateQuantity(value.value);
+                submit();
             }
         });
     </script>
@@ -42,7 +39,7 @@
 <body>
     <div class="box">
         <h1>Insira a quantidade</h1>
-        <input type="text" name="quantity" id="quantity" onchange="submit" autofocus>
+        <input type="text" name="quantity" id="quantity" autofocus>
         <button onclick="submit()">Ok</button>
     </div>
 </body>
