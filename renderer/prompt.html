@@ -12,18 +12,13 @@
             quantityInput.focus();
         });
 
-        function updateQuantity(qtd) {
-            console.log(qtd);
-            window.cartAPI.updateQuantity(qtd);
-        }
-
         function submit() {
-            const quantity = document.getElementById('quantity').value;
+            const quantityInput = document.getElementById('quantity');
 
-            if (quantity > 0) {
-                console.log(`Quantity: ${quantity}`);
-                window.cartAPI.updateQuantity(Number(quantity));
-                // window.electronAPI.sendQuantity(Number(quantity));
+            if (quantityInput.value > 0) {
+                console.log('Sending quantity to main process');
+                window.cartAPI.updateQuantity(Number(quantityInput.value));
+                quantityInput.value = '';
                 window.close();
             }
         }

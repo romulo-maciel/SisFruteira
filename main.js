@@ -22,34 +22,51 @@ app.whenReady().then(() => {
         // frame: false,
     })
 
-    ipcMain.handle('open-prompt', async (event, message) => {
-        return new Promise((resolve) => {
-            let promptWindow = new BrowserWindow({
-                width: 400,
-                height: 400,
-                parent: win,
-                modal: true,
-                frame: false,
-                transparent: true,
-                resizable: false,
-                webPreferences: {
-                    preload: path.join(__dirname, 'preload.js'),
-                    sandbox: false,
-                    contextIsolation: true,
-                    nodeIntegration: false,
-                }
-            });
 
-            promptWindow.loadFile('renderer/prompt.html');
+    ipcMain.handle('prompt-quantity', async () => {
+        let promptWindow = new BrowserWindow({
+            width: 400,
+            height: 400,
+            parent: win,
+            modal: true,
+            frame: false,
+            transparent: true,
+            resizable: false,
+            webPreferences: {
+                preload: path.join(__dirname, 'preload.js'),
+                sandbox: false,
+                contextIsolation: true,
+                nodeIntegration: false,
+            }
+        });
 
-            ipcMain.once('update-quantity', (event, value) => {
+        promptWindow.loadFile('renderer/prompt.html');
+
+        return new Promise((resolve, reject) => {
+            // Quando o usuário confirmar
+            ipcMain.once('update-quantity', (_, value) => {
                 resolve(value);
-                console.log('update-quantity: ', value);
-                win.webContents.send('add-to-cart', value);
                 promptWindow.close();
             });
 
-            
+            // Opcional: tratar cancelamento
+            // ipcMain.once('cancel-quantity', () => {
+            //   resolve(null);
+            //   promptWindow.close();
+            // });
+
+            promptWindow.once('ready-to-show', () => {
+                promptWindow.show();
+            });
+
+            // ipcMain.once('update-quantity', (event, value) => {
+            //     resolve(value);
+            //     console.log('\n\nupdate-quantity on main process');
+            //     win.webContents.send('add-to-cart', value);
+            //     promptWindow.close();
+            // });
+
+
         });
     });
 

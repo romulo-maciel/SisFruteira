@@ -15,23 +15,22 @@ contextBridge.exposeInMainWorld('fruitsAPI', {
 });
 
 contextBridge.exposeInMainWorld('cartAPI', {
-    promptQuantity: async () => {
-        console.log('promptQuantity() called');
-        const result = await ipcRenderer.invoke('open-prompt', 'Quantidade:');
-        return result;
-    },
+    promptQuantity: () => ipcRenderer.invoke('prompt-quantity', 'Quantidade:'),
+
     updateQuantity: (product, quantity) => {
-        console.log('sending info to main process');
+        console.log('Sending quantity to main process (updateQuantity)');
         console.log('product: ', product);
         console.log('quantity: ', quantity);
         ipcRenderer.send('update-quantity', product, quantity);
     },
-    addToCart: (callback) => {
-        ipcRenderer.on('add-to-cart', (event, product) => {
-            console.log('add-to-cart() called');
-            callback(product);
-        });
-    },
+
+    // addToCart: (callback) => {
+    //     ipcRenderer.on('add-to-cart', (event, product) => {
+    //         console.log('add-to-cart() called');
+    //         callback(product);
+    //     });
+    // },
+
     finishPurchase: async () => {
         console.log('finishPurchase() called');
         const result = await ipcRenderer.invoke('finish-purchase');

@@ -171,34 +171,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         setProduct(codeInput.value);
     });
 
-    async function addToCart() {
-        let code = codeInput.value.padStart(2, '0');
-        // let product = products.find(p => p.code == code);
-        let product = products[code]
-        let qtd = 0;
-        if (!product) return;
+        const addRow = (product, qtd) => {
 
-        if (product.isUnitary) {
-            window.cartAPI.promptQuantity()
-            window.cartAPI.addToCart((value) => {
-                qtd = parseFloat(value);
-                if (isNaN(qtd)) {
-                    alert("Quantidade inválida");
-                    return;
-                }
-                addRow();
-            });
-        } else {
-            console.log(getWeight());
-            getWeight().then(weight => {
-                qtd = parseFloat(weight.slice(1)) / 1000
-                addRow();
-            })
-        }
-
-        const addRow = () => {
-
-            console.log(product, qtd);
+            console.log('addRow called');
 
             let row = document.createElement("tr");
             row.innerHTML = `
@@ -227,6 +202,29 @@ document.addEventListener("DOMContentLoaded", async () => {
             weightInfo.textContent = "";
             itemPrice.textContent = "";
             productImage.src = "";
+        }
+
+    async function addToCart() {
+        let code = codeInput.value.padStart(2, '0');
+        // let product = products.find(p => p.code == code);
+        let product = products[code]
+        let qtd = 0;
+        if (!product) return;
+
+        if (product.isUnitary) {
+            const value = await window.cartAPI.promptQuantity();
+            qtd = parseFloat(value);
+            if (isNaN(qtd)) {
+                alert("Quantidade inválida");
+                throw new Error("Quantidade inválida");
+            }
+            addRow(product, qtd);
+        } else {
+            console.log(getWeight());
+            getWeight().then(weight => {
+                qtd = parseFloat(weight.slice(1)) / 1000
+                addRow(product, qtd);
+            })
         }
     }
 
