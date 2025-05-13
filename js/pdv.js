@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
-        getWeight().then(async weight => {  
+        getWeight().then(async weight => {
             while (weight.slice(1) == 'IIIII') {
                 // await new Promise(resolve => setTimeout(resolve, 100)); // Wait 100ms before requesting again
                 weight = await getWeight();
@@ -173,36 +173,36 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     function addRow(product, qtd) {
 
-            console.log('addRow called');
+        console.log('addRow called');
 
-            let row = document.createElement("tr");
-            row.innerHTML = `
+        let row = document.createElement("tr");
+        row.innerHTML = `
         <td>${product.name}</td>
         <td>${qtd}</td>
         <td>R$ ${product.price.toFixed(2)}${!product.isUnitary ? '/kg' : ''}</td>
         <td>R$ ${(product.price * qtd).toFixed(2)}</td>
         `;
 
-            if (isGray) {
-                row.classList.add("is-gray");
-            }
-
-            isGray = !isGray;
-            cartList.appendChild(row);
-
-            codeInput.value = "";
-
-            total += product.price * qtd;
-            document.getElementById("cart-total").textContent = `${total.toFixed(2)}`;
-
-            if (interval) {
-                clearInterval(interval);
-                interval = null;
-            }
-            weightInfo.textContent = "";
-            itemPrice.textContent = "";
-            productImage.src = "";
+        if (isGray) {
+            row.classList.add("is-gray");
         }
+
+        isGray = !isGray;
+        cartList.insertBefore(row, cartList.firstChild);
+
+        codeInput.value = "";
+
+        total += product.price * qtd;
+        document.getElementById("cart-total").textContent = `${total.toFixed(2)}`;
+
+        if (interval) {
+            clearInterval(interval);
+            interval = null;
+        }
+        weightInfo.textContent = "";
+        itemPrice.textContent = "";
+        productImage.src = "";
+    }
 
     async function addToCart() {
         let code = codeInput.value.padStart(2, '0');
