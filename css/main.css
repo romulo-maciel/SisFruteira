@@ -87,27 +87,32 @@ body {
     font-size: 1.5em;
 }
 
-#cart-list {
-    overflow: scroll;
-    max-height: 30px;
-    max-width: 30px;
-}
-
 .cart-total p {
     font-size: 1.2em;
     align-self: center;
 }
 
-.cart {
+.cart-container {
+    max-height: 250px;
+    overflow-y: auto;
     width: 100%;
-    border-collapse: collapse;
+border-collapse: collapse;
     margin-top: 15px;
-    height: 50px;
-    max-height: 50px;
-    overflow-y: scroll;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     background-color: white;
+}
+
+.cart {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0;
+    height: unset;
+    max-height: unset;
+    overflow-y: unset;
+    border-radius: 0;
+    box-shadow: none;
+    background-color: unset;
 }
 
 .cart th,
@@ -121,6 +126,12 @@ body {
     background-color: #26834e;
     color: white;
 
+}
+
+.cart thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
 }
 
 .cart tr.is-gray {

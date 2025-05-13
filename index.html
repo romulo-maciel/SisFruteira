@@ -72,20 +72,21 @@
                 </div>
             </div>
 
-            <table class="cart">
-                <thead>
-                    <tr>
-                        <th>Produto</th>
-                        <th>Quantidade</th>
-                        <th>Preço Un.</th>
-                        <th>Subtotal</th>
-                    </tr>
-                </thead>
-                <tbody id="cart-list"></tbody>
-            </table>
+            <div class="cart-container">
+                <table class="cart">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                            <th>Preço Un.</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-list"></tbody>
+                </table>
+            </div>
 
-            <div class="inline" style="margin-top: 15px;">
-
+            <div class="inline" style="margin-top: 15px; display: flex; justify-content: end">
                 <input type="button" onclick="finishPurchase()" value="Finalizar Compra" id="finish-sale">
             </div>
         </section>
