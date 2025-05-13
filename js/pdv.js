@@ -21,11 +21,38 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-
     async function getWeight() {
         const weight = await window.weightAPI.getWeight()
-        // document.getElementById("weight").textContent = weight;
         return weight;
+    }
+
+    async function readStableWeight() {
+        let attempts = 0;
+        let weight;
+        while (attempts < 1000) { // Limita tentativas para evitar loop infinito
+            weight = await getWeight();
+            if (weight.slice(1) !== 'IIIII') {
+                weightInfo.classList.remove("unstable");
+                return weight;
+            }
+            weightInfo.textContent = 'Peso instável';
+            weightInfo.classList.add("unstable");
+            attempts++;
+        }
+        return null; // Não conseguiu peso estável
+    }
+
+    async function updateWeightAndPrice(product) {
+        const weight = await readStableWeight();
+        if (!weight) {
+            weightInfo.textContent = "Erro ao ler peso";
+            itemPrice.textContent = "";
+            return null;
+        }
+        let weightValue = parseFloat(weight.slice(1)) / 1000;
+        let itemPriceValue = product.price * weightValue;
+        weightInfo.textContent = `${weightValue.toFixed(3)}kg`;
+        itemPrice.textContent = `R$ ${itemPriceValue.toFixed(2)}`;
     }
 
     window.finishPurchase = async () => {
@@ -46,7 +73,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             const history = data.history || [];
             const statistics = data.statistics || [];
-
 
             const newHistoryEntry = {
                 date: new Date().toLocaleTimeString({ timeZone: "America/Sao_Paulo" }),
@@ -96,8 +122,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     };
 
-    window.setProduct = async (code) => {
-        // let product = products.find(p => p.code == code);
+    setProduct = async (code) => {
+        if (interval) {
+            clearInterval(interval);
+            interval = null;
+        }
         code = code.padStart(2, '0');
         codeInput.focus();
         let product = products[code]
@@ -120,65 +149,42 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
-        getWeight().then(async weight => {
-            while (weight.slice(1) == 'IIIII') {
-                // await new Promise(resolve => setTimeout(resolve, 100)); // Wait 100ms before requesting again
-                weight = await getWeight();
-                weightInfo.textContent = 'Peso instável';
+        await updateWeightAndPrice(product);
+
+        interval = setInterval(async () => {
+            const weight = await getWeight();
+            if (weight.slice(1) === 'IIIII') {
                 weightInfo.classList.add("unstable");
-            }
-            weightInfo.classList.remove("unstable");
-            if (weight.slice(1) == 'IIIII') {
-                weightInfo.textContent = "Erro ao ler peso";
-                itemPrice.textContent = "";
                 return;
             }
+            weightInfo.classList.remove("unstable");
             let weightValue = parseFloat(weight.slice(1)) / 1000;
             let itemPriceValue = product.price * weightValue;
-
             weightInfo.textContent = `${weightValue.toFixed(3)}kg`;
             itemPrice.textContent = `R$ ${itemPriceValue.toFixed(2)}`;
-
-            interval = setInterval(async () => {
-                weight = await getWeight();
-                if (weight.slice(1) == 'IIIII') {
-                    weightInfo.classList.add("unstable");
-                    return;
-                }
-                weightInfo.classList.remove("unstable");
-                weightValue = parseFloat(weight.slice(1)) / 1000;
-                itemPriceValue = product.price * weightValue;
-
-                // console.log(weightValue, itemPriceValue);
-
-                weightInfo.textContent = `${weightValue.toFixed(3)}kg`;
-                itemPrice.textContent = `R$ ${itemPriceValue.toFixed(2)}`;
-            }
-                , 500);
-        });
-
-        if (interval) {
-            clearInterval(interval);
-            interval = null
-        }
+        }, 500);
     }
 
     codeInput.addEventListener("change", () => {
         if (interval) {
             clearInterval(interval);
-            interval = null
+            interval = null;
         }
         setProduct(codeInput.value);
     });
 
     function addRow(product, qtd) {
+        if (interval) {
+            clearInterval(interval);
+            interval = null;
+        }
 
         console.log('addRow called');
 
         let row = document.createElement("tr");
         row.innerHTML = `
         <td>${product.name}</td>
-        <td>${qtd}</td>
+        <td>${qtd}${!product.isUnitary ? 'kg' : ''}</td>
         <td>R$ ${product.price.toFixed(2)}${!product.isUnitary ? '/kg' : ''}</td>
         <td>R$ ${(product.price * qtd).toFixed(2)}</td>
         `;
@@ -195,18 +201,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         total += product.price * qtd;
         document.getElementById("cart-total").textContent = `${total.toFixed(2)}`;
 
-        if (interval) {
-            clearInterval(interval);
-            interval = null;
-        }
         weightInfo.textContent = "";
         itemPrice.textContent = "";
         productImage.src = "";
     }
 
     async function addToCart() {
+        if (interval) {
+            clearInterval(interval);
+            interval = null;
+        }
         let code = codeInput.value.padStart(2, '0');
-        // let product = products.find(p => p.code == code);
         let product = products[code]
         let qtd = 0;
         if (!product) return;
@@ -220,19 +225,32 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
             addRow(product, qtd);
         } else {
-            console.log(getWeight());
-            getWeight().then(weight => {
-                qtd = parseFloat(weight.slice(1)) / 1000
+            getWeight().then(async weight => {
+                // Limpa o intervalo novamente ANTES de adicionar ao carrinho
+                if (interval) {
+                    clearInterval(interval);
+                    interval = null;
+                }
+                if (weight.slice(1) === 'IIIII') {
+                    weightInfo.classList.add("unstable");
+                    while (!readStableWeight()) {
+                        if (isNaN(weight.slice(1)) && weight.slice(1) !== 'IIIII') {
+                            weightInfo.classList.remove("unstable");
+                            break;
+                        }
+                    }
+                    weight = await readStableWeight();
+                }
+                weightInfo.classList.remove("unstable");
+                weightInfo.textContent = `${weight.slice(1)}g`;
+                
+                qtd = parseFloat(weight.slice(1)) / 1000;
                 addRow(product, qtd);
             })
         }
     }
 
-
-
     document.addEventListener("keypress", (event) => {
-        // console.log(event);
-
         if (event.key === "Enter") {
             if (codeInput.value === "") {
                 finishPurchase();
@@ -255,14 +273,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     document.addEventListener("keydown", async (event) => {
         if (event.key === "Backspace") {
-            // console.log(codeInput.value, codeInput.value.slice(0, -1));
             setProduct(codeInput.value.slice(0, -1));
             return
         }
     });
 
     await fetchProducts();
-
-
 
 });
