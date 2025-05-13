@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         setProduct(codeInput.value);
     });
 
-        const addRow = (product, qtd) => {
+    function addRow(product, qtd) {
 
             console.log('addRow called');
 
