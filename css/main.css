@@ -1,7 +1,9 @@
 body {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 99vh;
+    max-height: 99vh;
+    overflow: hidden;
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #f8f8f8;
@@ -12,6 +14,7 @@ body {
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 20px;
+    max-height: calc(100vh - 70px);
 }
 
 .hidden {
@@ -77,9 +80,17 @@ body {
     display: flex;
     justify-content: space-between;
     border: 1px solid #ddd;
+    background-color: #fff;
     padding: 10px;
     border-radius: 15px;
     width: 60%;
+    font-size: 1.5em;
+}
+
+#cart-list {
+    overflow: scroll;
+    max-height: 30px;
+    max-width: 30px;
 }
 
 .cart-total p {
@@ -91,6 +102,12 @@ body {
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
+    height: 50px;
+    max-height: 50px;
+    overflow-y: scroll;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: white;
 }
 
 .cart th,
@@ -203,6 +220,7 @@ body {
 .unstable {
     color: red;
     font-weight: bold;
+    font-size: 1.3em;
 }
 
 

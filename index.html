@@ -42,6 +42,10 @@
     <main class="container" id="pdv">
         <section class="side" id="left-side-container">
             <img src="assets/logo.jpg" alt="logo" id="big-logo">
+            <div class="cart-total">
+                <p class="cart-total-title" style="font-weight: bold;">Total:</p>
+                <p class="cart-total-value" id="cart-total">R$ 0,00</p>
+            </div>
         </section>
 
         <section class="side" id="right-side-container">
@@ -81,9 +85,7 @@
             </table>
 
             <div class="inline" style="margin-top: 15px;">
-                <div class="cart-total">
-                    <p>Total: R$ <span id="cart-total">0.00</span></p>
-                </div>
+
                 <input type="button" onclick="finishPurchase()" value="Finalizar Compra" id="finish-sale">
             </div>
         </section>
