@@ -25,10 +25,12 @@
   "scripts": {
     "watch": "nodemon --exec electron .",
     "test": "electron .",
-    "run": "electron."
+    "run": "electron.",
+    "package-win": "electron-packager . SisFruteira --platform=win32 --arch=x64 --out=release --overwrite"
   },
   "devDependencies": {
-    "electron": "^34.3.0"
+    "electron": "^34.3.0",
+    "electron-packager": "^17.1.2"
   },
   "dependencies": {
     "express": "^4.21.2",

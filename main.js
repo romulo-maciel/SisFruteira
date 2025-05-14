@@ -73,8 +73,10 @@ app.whenReady().then(() => {
     win.maximize()
     win.loadFile('index.html')
 
+    const DEFAULT_PORT = process.platform === 'win32' ? 'COM6' : '/dev/ttyUSB0';
+
     const port = new SerialPort({
-        path: '/dev/ttyUSB0',
+        path: DEFAULT_PORT,
         baudRate: 9600,
         dataBits: 8,
         stopBits: 1,
