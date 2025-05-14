@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
                 weightInfo.classList.remove("unstable");
                 weightInfo.textContent = `${weight.slice(1)}g`;
-                
+
                 qtd = parseFloat(weight.slice(1)) / 1000;
                 addRow(product, qtd);
             })
@@ -251,6 +251,36 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     document.addEventListener("keypress", (event) => {
+        console.log(event.key);
+        if (event.key === '-') {
+            console.log("Remover produto");
+            const productCode = codeInput.value.padStart(2, '0');
+            console.log("Código do produto:", productCode);
+            const product = products[productCode];
+            console.log("Produto:", product);
+            if (!product) {
+                console.log("Produto não encontrado");
+                return;
+            }
+            const rows = Array.from(cartList.querySelectorAll("tr"));
+            const matchingRow = rows.reverse().find(row => row.cells[0].textContent === product.name);
+            console.log("Linha correspondente:", matchingRow);
+            if (matchingRow) {
+                // if(!confirm("Deseja remover o produto do carrinho?")) return;
+                const quantityText = matchingRow.cells[1].textContent;
+                const qty = parseFloat(quantityText.replace('kg', ''));
+                const priceText = matchingRow.cells[2].textContent;
+                const price = parseFloat(priceText.replace('/kg', '').replace('R$ ', ''));
+                total -= price * qty;
+                document.getElementById("cart-total").textContent = `${total.toFixed(2)}`;
+                cartList.removeChild(matchingRow);
+            } else {
+                console.log("Produto não encontrado no carrinho");
+            }
+            codeInput.value = "";
+            event.preventDefault();
+            return;
+        }
         if (event.key === "Enter") {
             if (codeInput.value === "") {
                 finishPurchase();
