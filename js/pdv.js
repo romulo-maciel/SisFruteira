@@ -55,77 +55,107 @@ document.addEventListener("DOMContentLoaded", async () => {
         itemPrice.textContent = `R$ ${itemPriceValue.toFixed(2)}`;
     }
 
-    window.finishPurchase = async () => {
+    // window.finishPurchase = async () => {
+    //     if (confirm("Deseja finalizar a compra?")) {
+    //         const purchaseData = [];
+    //         cartList.querySelectorAll("tr").forEach(row => {
+    //             const cells = row.querySelectorAll("td");
+    //             purchaseData.push({
+    //                 name: cells[0].textContent,
+    //                 quantity: parseFloat(cells[1].textContent),
+    //                 price: parseFloat(cells[2].textContent.replace('/kg', '').replace('R$ ', '')),
+    //                 total: parseFloat(cells[3].textContent.replace('R$ ', ''))
+    //             });
+    //         });
+
+    //         const dataResponse = await fetch("api/record");
+    //         let data = await dataResponse.json();
+
+    //         const history = data.history || [];
+    //         const statistics = data.statistics || [];
+
+    //         const newHistoryEntry = {
+    //             date: new Date().toLocaleTimeString({ timeZone: "America/Sao_Paulo" }),
+    //             items: purchaseData,
+    //             total: purchaseData.reduce((sum, item) => sum + item.total, 0).toFixed(2)
+    //         };
+
+    //         history.push(newHistoryEntry);
+
+    //         purchaseData.forEach(item => {
+    //             const stat = statistics.find(stat => stat.name === item.name && stat.price === item.price);
+    //             if (stat) {
+    //                 stat.quantity += item.quantity;
+    //                 stat.total += item.total;
+    //             } else {
+    //                 statistics.push({
+    //                     name: item.name,
+    //                     quantity: item.quantity.toFixed(2),
+    //                     total: item.total.toFixed(2),
+    //                     price: item.price.toFixed(2),
+    //                 });
+    //             }
+    //         });
+
+    //         statistics.sort((a, b) => a.name.localeCompare(b.name));
+
+    //         data = {
+    //             history: history,
+    //             statistics: statistics
+    //         };
+
+    //         await fetch("api/record", {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json"
+    //             },
+    //             body: JSON.stringify(data)
+    //         });
+
+    //         cartList.innerHTML = "";
+    //         total = 0;
+    //         document.getElementById("cart-total").textContent = "0.00";
+    //         setProduct("");
+
+    //         alert("Compra finalizada");
+
+    //     }
+    // };
+
+    window.finishPurchase = () => {
         if (confirm("Deseja finalizar a compra?")) {
-            const purchaseData = [];
-            cartList.querySelectorAll("tr").forEach(row => {
-                const cells = row.querySelectorAll("td");
-                purchaseData.push({
-                    name: cells[0].textContent,
-                    quantity: parseFloat(cells[1].textContent),
-                    price: parseFloat(cells[2].textContent.replace('/kg', '').replace('R$ ', '')),
-                    total: parseFloat(cells[3].textContent.replace('R$ ', ''))
-                });
-            });
-
-            const dataResponse = await fetch("api/record");
-            let data = await dataResponse.json();
-
-            const history = data.history || [];
-            const statistics = data.statistics || [];
-
-            const newHistoryEntry = {
-                date: new Date().toLocaleTimeString({ timeZone: "America/Sao_Paulo" }),
-                items: purchaseData,
-                total: purchaseData.reduce((sum, item) => sum + item.total, 0).toFixed(2)
-            };
-
-            history.push(newHistoryEntry);
-
-            purchaseData.forEach(item => {
-                const stat = statistics.find(stat => stat.name === item.name && stat.price === item.price);
-                if (stat) {
-                    stat.quantity += item.quantity;
-                    stat.total += item.total;
-                } else {
-                    statistics.push({
-                        name: item.name,
-                        quantity: item.quantity.toFixed(2),
-                        total: item.total.toFixed(2),
-                        price: item.price.toFixed(2),
-                    });
-                }
-            });
-
-            statistics.sort((a, b) => a.name.localeCompare(b.name));
-
-            data = {
-                history: history,
-                statistics: statistics
-            };
-
-            await fetch("api/record", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            });
-
-            cartList.innerHTML = "";
-            total = 0;
-            document.getElementById("cart-total").textContent = "0.00";
-            setProduct("");
-
-            alert("Compra finalizada");
-
+            console.log("Finalizando compra...");
+            // setTimeout(() => {
+            //     cartList.innerHTML = "";
+            //     total = 0;
+            //     document.getElementById("cart-total").textContent = "0.00";
+            //     productImage.src = "";
+            //     productName.textContent = "Digite o código do produto";
+            //     codeInput.value = "";
+            //     codeInput.focus();
+            //     console.log(codeInput)
+            //     productPrice.textContent = "";
+            //     weightInfo.textContent = "";
+            //     itemPrice.textContent = "";
+            //     alert("Compra finalizada");
+            // }, 1000);
         }
-    };
+    }
 
     setProduct = async (code) => {
         if (interval) {
             clearInterval(interval);
             interval = null;
+        }
+        if (!code) {
+            productImage.src = "";
+            productName.textContent = "Digite o código do produto";
+            codeInput.value = "";
+            codeInput.focus();
+            productPrice.textContent = "";
+            weightInfo.textContent = "";
+            itemPrice.textContent = "";
+            return;
         }
         code = code.padStart(2, '0');
         codeInput.focus();
@@ -141,6 +171,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             productPrice.textContent = "";
             weightInfo.textContent = "";
             itemPrice.textContent = "";
+            return;
         }
 
         if (product && product.isUnitary) {
@@ -284,9 +315,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (event.key === "Enter") {
             if (codeInput.value === "") {
                 finishPurchase();
+                // return
+            } else {
+                addToCart();
             }
-            addToCart();
-            return
+            // return
         }
 
         if (event.code.startsWith("Numpad") || event.code.startsWith("Digit")) {

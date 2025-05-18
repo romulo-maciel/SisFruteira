@@ -17,9 +17,9 @@ app.whenReady().then(() => {
             nodeIntegration: false
             // enableRemoteModule: false,
         },
-        // titleBarStyle: 'hidden',
-        // autoHideMenuBar: true,
-        // frame: false,
+        titleBarStyle: 'hidden',
+        autoHideMenuBar: true,
+        frame: false,
     })
 
 
@@ -50,10 +50,10 @@ app.whenReady().then(() => {
             });
 
             // Opcional: tratar cancelamento
-            // ipcMain.once('cancel-quantity', () => {
-            //   resolve(null);
-            //   promptWindow.close();
-            // });
+            ipcMain.once('cancel-quantity', () => {
+                resolve(null);
+                promptWindow.close();
+            });
 
             promptWindow.once('ready-to-show', () => {
                 promptWindow.show();
