@@ -26,11 +26,22 @@
     "watch": "nodemon --exec electron .",
     "test": "electron .",
     "run": "electron.",
-    "package-win": "electron-packager . SisFruteira --platform=win32 --arch=x64 --out=release --overwrite"
+    "package-win": "electron-packager . SisFruteira --platform=win32 --arch=x64 --out=release --overwrite",
+    "dist:linux": "electron-builder --linux AppImage"
+  },
+  "build": {
+    "appId": "com.fruteira.app",
+    "productName": "SisFruteira",
+    "linux": {
+      "target": ["AppImage"],
+      "category": "Office"
+    },
+    "icon": "assets/logo.png"
   },
   "devDependencies": {
     "electron": "^34.3.0",
-    "electron-packager": "^17.1.2"
+    "electron-packager": "^17.1.2",
+    "electron-builder": "^26.0.12"
   },
   "dependencies": {
     "express": "^4.21.2",

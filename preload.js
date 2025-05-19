@@ -9,6 +9,22 @@ contextBridge.exposeInMainWorld('fruitsAPI', {
         const fruits = fs.readFileSync(path.join(__dirname, 'assets/products.json'), 'utf8');
         return JSON.parse(fruits);
     },
+    updatePrice: (code, price) => {
+        try {
+            const productsPath = path.join(__dirname, 'assets/products.json');
+            const products = JSON.parse(fs.readFileSync(productsPath, 'utf8'));
+
+            if (products[code]) {
+                products[code].price = price === '' || isNaN(parseFloat(price)) ? null : parseFloat(price);
+                fs.writeFileSync(productsPath, JSON.stringify(products, null, 4));
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.error('Error updating price:', error);
+            return false;
+        }
+    },
     ping: () => {
         console.log('pong');
     }
