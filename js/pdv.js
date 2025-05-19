@@ -122,23 +122,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     //     }
     // };
 
-    window.finishPurchase = () => {
-        if (confirm("Deseja finalizar a compra?")) {
-            console.log("Finalizando compra...");
-            // setTimeout(() => {
-            //     cartList.innerHTML = "";
-            //     total = 0;
-            //     document.getElementById("cart-total").textContent = "0.00";
-            //     productImage.src = "";
-            //     productName.textContent = "Digite o código do produto";
-            //     codeInput.value = "";
-            //     codeInput.focus();
-            //     console.log(codeInput)
-            //     productPrice.textContent = "";
-            //     weightInfo.textContent = "";
-            //     itemPrice.textContent = "";
-            //     alert("Compra finalizada");
-            // }, 1000);
+    window.finishPurchase = async () => {
+        // Usa o novo prompt customizado em vez do confirm nativo
+        const confirmed = await window.cartAPI.promptConfirmation();
+        
+        if (confirmed) {
+            // Limpa o carrinho e reseta os valores
+            cartList.innerHTML = "";
+            total = 0;
+            document.getElementById("cart-total").textContent = "0.00";
+            productImage.src = "";
+            productName.textContent = "Digite o código do produto";
+            productPrice.textContent = "";
+            weightInfo.textContent = "";
+            itemPrice.textContent = "";
+            codeInput.value = "";
         }
     }
 
@@ -294,7 +292,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                 return;
             }
             const rows = Array.from(cartList.querySelectorAll("tr"));
-            const matchingRow = rows.reverse().find(row => row.cells[0].textContent === product.name);
+            // const matchingRow = rows.reverse().find(row => row.cells[0].textContent === product.name);
+            const matchingRow = rows.find(row => row.cells[0].textContent === product.name);
             console.log("Linha correspondente:", matchingRow);
             if (matchingRow) {
                 // if(!confirm("Deseja remover o produto do carrinho?")) return;

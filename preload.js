@@ -24,6 +24,15 @@ contextBridge.exposeInMainWorld('cartAPI', {
         ipcRenderer.send('update-quantity', product, quantity);
     },
 
+    // Novo método para confirmar finalização da compra
+    confirmPurchase: (confirmed) => {
+        console.log('Sending confirmation to main process');
+        ipcRenderer.send('confirm-purchase', confirmed);
+    },
+
+    // Novo método para abrir o diálogo de confirmação
+    promptConfirmation: () => ipcRenderer.invoke('prompt-confirmation'),
+
     // addToCart: (callback) => {
     //     ipcRenderer.on('add-to-cart', (event, product) => {
     //         console.log('add-to-cart() called');

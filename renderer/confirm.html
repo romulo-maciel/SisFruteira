@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação</title>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            // Foca automaticamente no botão OK para permitir confirmar com Enter
+            document.getElementById('confirm-button').focus();
+        });
+
+        function confirm() {
+            // Envia confirmação positiva
+            window.cartAPI.confirmPurchase(true);
+            window.close();
+        }
+
+        function cancel() {
+            // Envia confirmação negativa
+            window.cartAPI.confirmPurchase(false);
+            window.close();
+        }
+
+        addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                // Enter confirma por padrão
+                confirm();
+            } else if (e.key === 'Escape') {
+                // Escape cancela
+                cancel();
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div class="box">
+        <h1>Deseja finalizar a compra?</h1>
+        <div class="buttons">
+            <button id="confirm-button" onclick="confirm()">OK</button>
+            <button id="cancel-button" onclick="cancel()">Cancelar</button>
+        </div>
+    </div>
+</body>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        background-color: #00000000;
+    }
+
+    .box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 200px;
+        width: 350px;
+        background-color: #f8f9fa;
+        border: 1px solid #ccc;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 20px;
+    }
+
+    button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.2s;
+    }
+
+    #confirm-button {
+        background-color: #28a745;
+        color: white;
+    }
+
+    #confirm-button:hover {
+        background-color: #218838;
+    }
+
+    #cancel-button {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    #cancel-button:hover {
+        background-color: #c82333;
+    }
+
+    /* Estilo para o botão focado */
+    button:focus {
+        outline: 3px solid #007bff;
+    }
+</style>
+
+</html>

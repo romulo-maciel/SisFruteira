@@ -70,6 +70,44 @@ app.whenReady().then(() => {
         });
     });
 
+    // Novo handler para o prompt de confirmação
+    ipcMain.handle('prompt-confirmation', async () => {
+        let confirmWindow = new BrowserWindow({
+            width: 400,
+            height: 400,
+            parent: win,
+            modal: true,
+            frame: false,
+            transparent: true,
+            resizable: false,
+            webPreferences: {
+                preload: path.join(__dirname, 'preload.js'),
+                sandbox: false,
+                contextIsolation: true,
+                nodeIntegration: false,
+            }
+        });
+
+        confirmWindow.loadFile('renderer/confirm.html');
+
+        return new Promise((resolve, reject) => {
+            // Quando o usuário confirmar
+            ipcMain.once('confirm-purchase', (_, confirmed) => {
+                resolve(confirmed);
+                confirmWindow.close();
+                
+                // Se confirmou, recarrega a página principal
+                if (confirmed) {
+                    win.reload();
+                }
+            });
+
+            confirmWindow.once('ready-to-show', () => {
+                confirmWindow.show();
+            });
+        });
+    });
+
     win.maximize()
     win.loadFile('index.html')
 
