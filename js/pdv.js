@@ -282,19 +282,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.addEventListener("keypress", (event) => {
         console.log(event.key);
         if (event.key === '-') {
-            console.log("Remover produto");
             const productCode = codeInput.value.padStart(2, '0');
-            console.log("Código do produto:", productCode);
             const product = products[productCode];
-            console.log("Produto:", product);
             if (!product) {
-                console.log("Produto não encontrado");
                 return;
             }
             const rows = Array.from(cartList.querySelectorAll("tr"));
             // const matchingRow = rows.reverse().find(row => row.cells[0].textContent === product.name);
             const matchingRow = rows.find(row => row.cells[0].textContent === product.name);
-            console.log("Linha correspondente:", matchingRow);
             if (matchingRow) {
                 // if(!confirm("Deseja remover o produto do carrinho?")) return;
                 const quantityText = matchingRow.cells[1].textContent;
@@ -315,7 +310,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (codeInput.value == "" && document.activeElement === codeInput) {
                 finishPurchase();
             }
-            // return
+            else {
+                addToCart();
+            }
         }
 
         if (event.code.startsWith("Numpad") || event.code.startsWith("Digit")) {
