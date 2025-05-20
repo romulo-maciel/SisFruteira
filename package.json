@@ -27,7 +27,8 @@
     "test": "electron .",
     "run": "electron.",
     "package-win": "electron-packager . SisFruteira --platform=win32 --arch=x64 --out=release --overwrite",
-    "dist:linux": "electron-builder --linux AppImage"
+    "dist:linux": "electron-builder --linux AppImage",
+    "dist:win": "electron-builder --win --x64"
   },
   "build": {
     "appId": "com.fruteira.app",
