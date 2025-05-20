@@ -2,12 +2,26 @@ const { app, BrowserWindow, ipcMain, webContents } = require('electron')
 const path = require('node:path')
 const { SerialPort, ReadlineParser } = require('serialport')
 
+function createWindow () {
+    const win = new BrowserWindow({
+        width: 800,
+        height: 600,
+        webPreferences: {
+            preload: path.join(__dirname, 'preload.js'),
+            contextIsolation: true,
+            nodeIntegration: false,
+        }
+    });
 
+    win.loadFile('index.html');
+}
 
+ipcMain.handle('get-user-data-path', () => {
+    return app.getPath('userData');
+});
 
 app.whenReady().then(() => {
 
-    // createWindow()
     const win = new BrowserWindow({
 
         webPreferences: {
@@ -15,7 +29,6 @@ app.whenReady().then(() => {
             sandbox: false,
             contextIsolation: true,
             nodeIntegration: false
-            // enableRemoteModule: false,
         },
         titleBarStyle: 'hidden',
         autoHideMenuBar: true,
@@ -43,13 +56,11 @@ app.whenReady().then(() => {
         promptWindow.loadFile('renderer/prompt.html');
 
         return new Promise((resolve, reject) => {
-            // Quando o usuário confirmar
             ipcMain.once('update-quantity', (_, value) => {
                 resolve(value);
                 promptWindow.close();
             });
 
-            // Opcional: tratar cancelamento
             ipcMain.once('cancel-quantity', () => {
                 resolve(null);
                 promptWindow.close();
@@ -58,19 +69,9 @@ app.whenReady().then(() => {
             promptWindow.once('ready-to-show', () => {
                 promptWindow.show();
             });
-
-            // ipcMain.once('update-quantity', (event, value) => {
-            //     resolve(value);
-            //     console.log('\n\nupdate-quantity on main process');
-            //     win.webContents.send('add-to-cart', value);
-            //     promptWindow.close();
-            // });
-
-
         });
     });
 
-    // Novo handler para o prompt de confirmação
     ipcMain.handle('prompt-confirmation', async () => {
         let confirmWindow = new BrowserWindow({
             width: 400,
@@ -91,12 +92,10 @@ app.whenReady().then(() => {
         confirmWindow.loadFile('renderer/confirm.html');
 
         return new Promise((resolve, reject) => {
-            // Quando o usuário confirmar
             ipcMain.once('confirm-purchase', (_, confirmed) => {
                 resolve(confirmed);
                 confirmWindow.close();
                 
-                // Se confirmou, recarrega a página principal
                 if (confirmed) {
                     win.reload();
                 }
@@ -122,15 +121,12 @@ app.whenReady().then(() => {
     });
 
     port.on('open', () => {
-        // console.log('Serial Port Opened');
         port.write('\x05');
     });
 
-    const parser = port.pipe(new ReadlineParser({ delimiter: '\x03' })); // ETX (03H) como delimitador
-
+    const parser = port.pipe(new ReadlineParser({ delimiter: '\x03' }));
 
     ipcMain.handle('get-weight', async (event) => {
-        // console.log('get-weight called on main'); 
         return new Promise((resolve) => {
             port.write('\x05');
             parser.once('data', data => {
@@ -142,10 +138,6 @@ app.whenReady().then(() => {
     port.on('error', err => {
         console.error('Serial Port Error:', err);
     });
-
-    // app.on('activate', () => {
-    //     if (BrowserWindow.getAllWindows().length === 0) createWindow()
-    // })
 })
 
 app.on('window-all-closed', () => {

@@ -5,6 +5,7 @@ out/
 
 # Node modules
 node_modules/
+package-lock.json
 
 # Optional npm cache directory
 .npm/
@@ -20,3 +21,4 @@ cache/
 # Miscellaneous
 coverage/
 tmp/
+

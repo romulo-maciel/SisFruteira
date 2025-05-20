@@ -1,72 +1,86 @@
-const { contextBridge, ipcRenderer, dialog } = require('electron');
+const { contextBridge, ipcRenderer } = require('electron');
 const fs = require('fs');
 const path = require('path');
 
+let userDataPath;
+let productsUserPath;
+let productsAssetPath;
 
-contextBridge.exposeInMainWorld('fruitsAPI', {
-    getFruits: () => {
-        // console.log('getFruits() called');
-        const fruits = fs.readFileSync(path.join(__dirname, 'assets/products.json'), 'utf8');
-        return JSON.parse(fruits);
-    },
-    updatePrice: (code, price) => {
-        try {
-            const productsPath = path.join(__dirname, 'assets/products.json');
-            const products = JSON.parse(fs.readFileSync(productsPath, 'utf8'));
+async function initPaths() {
+    userDataPath = await ipcRenderer.invoke('get-user-data-path');
+    productsUserPath = path.join(userDataPath, 'products.json');
+    productsAssetPath = path.join(__dirname, 'assets/products.json');
 
-            if (products[code]) {
-                products[code].price = price === '' || isNaN(parseFloat(price)) ? null : parseFloat(price);
-                fs.writeFileSync(productsPath, JSON.stringify(products, null, 4));
-                return true;
-            }
-            return false;
-        } catch (error) {
-            console.error('Error updating price:', error);
-            return false;
-        }
-    },
-    ping: () => {
-        console.log('pong');
+    // Copia o arquivo original se não existir
+    if (!fs.existsSync(productsUserPath)) {
+        fs.copyFileSync(productsAssetPath, productsUserPath);
     }
-});
+}
 
-contextBridge.exposeInMainWorld('cartAPI', {
-    promptQuantity: () => ipcRenderer.invoke('prompt-quantity', 'Quantidade:'),
+function getFruits() {
+    if (!productsUserPath) throw new Error('Paths not initialized');
+    return JSON.parse(fs.readFileSync(productsUserPath, 'utf8'));
+}
 
-    updateQuantity: (product, quantity) => {
-        console.log('Sending quantity to main process (updateQuantity)');
-        console.log('product: ', product);
-        console.log('quantity: ', quantity);
-        ipcRenderer.send('update-quantity', product, quantity);
-    },
+function updatePrice(code, newPrice) {
+    try {
+        const products = getFruits();
+        // Se products for objeto, acesse diretamente pela chave
+        if (!products[code]) return false;
+        products[code].price = newPrice === '' ? null : parseFloat(newPrice);
+        fs.writeFileSync(productsUserPath, JSON.stringify(products, null, 2));
+        return true;
+    } catch (e) {
+        console.error(e);
+        return false;
+    }
+}
 
-    // Novo método para confirmar finalização da compra
-    confirmPurchase: (confirmed) => {
-        console.log('Sending confirmation to main process');
-        ipcRenderer.send('confirm-purchase', confirmed);
-    },
+// Inicializa os caminhos antes de expor as APIs
+initPaths().then(() => {
+    contextBridge.exposeInMainWorld('fruitsAPI', {
+        getFruits,
+        updatePrice
+    });
 
-    // Novo método para abrir o diálogo de confirmação
-    promptConfirmation: () => ipcRenderer.invoke('prompt-confirmation'),
+    contextBridge.exposeInMainWorld('cartAPI', {
+        promptQuantity: () => ipcRenderer.invoke('prompt-quantity', 'Quantidade:'),
 
-    // addToCart: (callback) => {
-    //     ipcRenderer.on('add-to-cart', (event, product) => {
-    //         console.log('add-to-cart() called');
-    //         callback(product);
-    //     });
-    // },
+        updateQuantity: (product, quantity) => {
+            console.log('Sending quantity to main process (updateQuantity)');
+            console.log('product: ', product);
+            console.log('quantity: ', quantity);
+            ipcRenderer.send('update-quantity', product, quantity);
+        },
 
-    finishPurchase: async () => {
-        console.log('finishPurchase() called');
-        const result = await ipcRenderer.invoke('finish-purchase');
-        return result;
-    },
-});
+        // Novo método para confirmar finalização da compra
+        confirmPurchase: (confirmed) => {
+            console.log('Sending confirmation to main process');
+            ipcRenderer.send('confirm-purchase', confirmed);
+        },
 
-contextBridge.exposeInMainWorld('weightAPI', {
-    getWeight: () => {
-        // console.log('getWeight() called');
-        const weight = ipcRenderer.invoke('get-weight');
-        return weight;
-    },
+        // Novo método para abrir o diálogo de confirmação
+        promptConfirmation: () => ipcRenderer.invoke('prompt-confirmation'),
+
+        // addToCart: (callback) => {
+        //     ipcRenderer.on('add-to-cart', (event, product) => {
+        //         console.log('add-to-cart() called');
+        //         callback(product);
+        //     });
+        // },
+
+        finishPurchase: async () => {
+            console.log('finishPurchase() called');
+            const result = await ipcRenderer.invoke('finish-purchase');
+            return result;
+        },
+    });
+
+    contextBridge.exposeInMainWorld('weightAPI', {
+        getWeight: () => {
+            // console.log('getWeight() called');
+            const weight = ipcRenderer.invoke('get-weight');
+            return weight;
+        },
+    });
 });
