@@ -312,11 +312,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
         if (event.key === "Enter") {
-            if (codeInput.value === "") {
+            if (codeInput.value == "" && document.activeElement === codeInput) {
                 finishPurchase();
-                // return
-            } else {
-                addToCart();
             }
             // return
         }

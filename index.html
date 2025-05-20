@@ -94,120 +94,122 @@
 
     <main class="container hidden" id="estoque">
         <script>
-            // Variável para armazenar o elemento que está sendo editado
-            let currentEditingElement = null;
+            (function () {
+                let currentEditingElement = null;
 
-            // Função para renderizar os cards de produtos
-            const populateCards = (fruits) => {
-                const container = document.getElementById('estoque');
-                const cards = fruits.map((fruit) => {
-                    // Verifica se o preço é nulo ou indefinido
-                    const priceDisplay = fruit.price === null || fruit.price === undefined 
-                        ? '<span class="price-not-set">Preço não configurado</span>' 
-                        : `R$ ${fruit.price.toFixed(2)}`;
-                    
-                    return `
-                    <div class="fruit-card">
-                        <img class="fruit-image" src="fruits/${fruit.image}" alt="${fruit.name}" width="50" height="50">
-                        <div class="fruit-info">
-                            <h2>${fruit.name}</h2>
-                            <p class="fruit-price" data-code="${fruit.code}" data-price="${fruit.price}" onclick="startEditPrice(this)">Preço: ${priceDisplay}
-                            </p>
-                        </div>
+                function populateCards(products) {
+                    const container = document.getElementById('estoque');
+                    container.innerHTML = products.map(product => {
+                        const priceDisplay = product.price == null
+                            ? '<span class="price-not-set">Preço não configurado</span>'
+                            : `R$ ${Number(product.price).toFixed(2)}`;
+                        return `
+                <div class="fruit-card">
+                    <img class="fruit-image" src="fruits/${product.image}" alt="${product.name}" width="50" height="50">
+                    <div class="fruit-info">
+                        <h2>${product.name}</h2>
+                        <span class="fruit-price"
+                                data-code="${product.code}"
+                                data-price="${product.price ?? ''}">
+                            Preço: ${priceDisplay}
+                        </span>
                     </div>
-                    `;
+                </div>
+            `;
+                    }).join('');
+                }
+
+                function startEditPrice(element) {
+                    if (currentEditingElement && currentEditingElement !== element) {
+                        cancelEditPrice();
+                    }
+                    currentEditingElement = element;
+                    const code = element.dataset.code;
+                    const currentPrice = element.dataset.price;
+
+                    // Store original content for restoration
+                    element.dataset.originalContent = element.innerHTML;
+
+                    element.innerHTML = `
+            <div class="price-editor">
+                <input type="number"
+                        class="price-input"
+                        value="${currentPrice !== 'null' && currentPrice !== undefined ? currentPrice : ''}"
+                        step="0.01"
+                        min="0"
+                        placeholder="Digite o preço">
+                <div class="price-actions">
+                    <button class="save-btn">Salvar</button>
+                    <button class="cancel-btn">Cancelar</button>
+                </div>
+            </div>
+        `;
+
+                    const input = element.querySelector('.price-input');
+                    setTimeout(() => input.focus(), 0);
+
+                    // Save on Enter
+                    input.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter') savePrice(code);
+                    });
+
+                    // Button handlers
+                    element.querySelector('.save-btn').onclick = () => savePrice(code);
+                    element.querySelector('.cancel-btn').onclick = cancelEditPrice;
+                }
+
+                function savePrice(code) {
+                    if (!currentEditingElement) return;
+                    const input = currentEditingElement.querySelector('.price-input');
+                    const newPrice = input.value.trim();
+                    const success = window.fruitsAPI.updatePrice(code, newPrice);
+
+                    if (success) {
+                        const priceValue = newPrice === '' ? null : parseFloat(newPrice);
+                        currentEditingElement.dataset.price = priceValue;
+                        const priceDisplay = priceValue == null
+                            ? '<span class="price-not-set">Preço não configurado</span>'
+                            : `R$ ${priceValue.toFixed(2)}`;
+                        currentEditingElement.innerHTML = `Preço: ${priceDisplay}`;
+                        currentEditingElement = null;
+                        alert('Preço salvo com sucesso!');
+                    } else {
+                        alert('Erro ao salvar o preço. Tente novamente.');
+                    }
+                }
+
+                function cancelEditPrice() {
+                    if (!currentEditingElement) return;
+                    currentEditingElement.innerHTML = currentEditingElement.dataset.originalContent;
+                    currentEditingElement = null;
+                }
+
+                // Event delegation for price editing
+                document.getElementById('estoque').addEventListener('click', function (event) {
+                    const priceEl = event.target.closest('.fruit-price');
+                    if (priceEl && !priceEl.querySelector('.price-editor')) {
+                        startEditPrice(priceEl);
+                        event.stopPropagation();
+                    }
                 });
 
-                container.innerHTML = cards.join('');
-            }
+                // Global click handler to close editor when clicking outside
+                document.addEventListener('click', function (event) {
+                    if (
+                        currentEditingElement &&
+                        !event.target.closest('.price-editor') &&
+                        !event.target.closest('.fruit-price')
+                    ) {
+                        cancelEditPrice();
+                    }
+                });
 
-            // Função para iniciar a edição do preço
-            function startEditPrice(element) {
-                // Se já estiver editando outro elemento, cancela a edição anterior
-                if (currentEditingElement && currentEditingElement !== element) {
-                    cancelEditPrice();
-                }
-
-                // Marca o elemento atual como sendo editado
-                currentEditingElement = element;
-                
-                // Obtém o código e preço atual do produto
-                const code = element.getAttribute('data-code');
-                const currentPrice = element.getAttribute('data-price');
-                
-                // Cria o HTML para o editor inline
-                const editorHTML = `
-                    <div class="price-editor">
-                        <input type="number" class="price-input" value="${currentPrice !== 'null' ? currentPrice : ''}" step="0.01" min="0" placeholder="Digite o preço">
-                        <div class="price-actions">
-                            <button class="save-btn" onclick="savePrice('${code}')">Salvar</button>
-                            <button class="cancel-btn" onclick="cancelEditPrice()">Cancelar</button>
-                        </div>
-                    </div>
-                `;
-                
-                // Salva o conteúdo original para restaurar se necessário
-                element.setAttribute('data-original-content', element.innerHTML);
-                
-                // Substitui o conteúdo pelo editor
-                element.innerHTML = editorHTML;
-                
-                // Foca no input
-                element.querySelector('.price-input').focus();
-                
-                // Previne o clique de propagar
-                event.stopPropagation();
-            }
-
-            // Função para salvar o preço editado
-            function savePrice(code) {
-                if (!currentEditingElement) return;
-                
-                // Obtém o valor do input
-                const input = currentEditingElement.querySelector('.price-input');
-                const newPrice = input.value.trim();
-                
-                // Salva o novo preço no arquivo products.json
-                const success = window.fruitsAPI.updatePrice(code, newPrice);
-                
-                if (success) {
-                    // Atualiza o atributo data-price
-                    const priceValue = newPrice === '' ? null : parseFloat(newPrice);
-                    currentEditingElement.setAttribute('data-price', priceValue);
-                    
-                    // Atualiza a exibição do preço
-                    const priceDisplay = priceValue === null 
-                        ? '<span class="price-not-set">Preço não configurado</span>' 
-                        : `R$ ${priceValue.toFixed(2)}`;
-                    
-                    currentEditingElement.innerHTML = `Preço: ${priceDisplay}`;
-                    currentEditingElement = null;
-                } else {
-                    alert('Erro ao salvar o preço. Tente novamente.');
-                }
-            }
-
-            // Função para cancelar a edição do preço
-            function cancelEditPrice() {
-                if (!currentEditingElement) return;
-                
-                // Restaura o conteúdo original
-                const originalContent = currentEditingElement.getAttribute('data-original-content');
-                currentEditingElement.innerHTML = originalContent;
-                currentEditingElement = null;
-            }
-
-            // Adiciona um listener para fechar a edição ao clicar fora
-            document.addEventListener('click', function(event) {
-                if (currentEditingElement && !currentEditingElement.contains(event.target)) {
-                    cancelEditPrice();
-                }
-            });
-
-            window.onload = () => {
-                const fruits = Object.values(window.fruitsAPI.getFruits());
-                populateCards(fruits);
-            }
+                // Initialize product cards on page load
+                window.addEventListener('DOMContentLoaded', () => {
+                    const products = Object.values(window.fruitsAPI.getFruits());
+                    populateCards(products);
+                });
+            })();
         </script>
     </main>
 
